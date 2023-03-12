@@ -1,0 +1,231 @@
+<html>
+<head>
+<title>Faculty Time Schduling</title>
+<style type="text/css">
+th, td {
+  padding: 15px;
+  text-align: center;
+}
+</style>
+</head>
+
+<body>
+	
+	<h1 align="center">Faculty Time Schedule</h1>
+  
+	<table id="Schtbl" style="margin-left:auto;margin-right:auto;">
+		<tr>
+			<th>Department</th>
+			<th>Course</th>
+			<th>Section</th> 
+			<th>Time</th>
+			<th>Days</th>
+			<th>Room</th>
+			<th>Faculty</th>			
+			<th>M</th>
+			<th>Capacity</th> 
+		</tr> 
+				<tr> 
+					<td id="col0" id="dept[0]"><b>ECE</b></td> 
+					<td id="col1"><input type="text" id="course[0]" value="" /></td> 
+					<td id="col2"><input type="text" id="section[0]" value="" /></td>
+					<td id="col3"> 
+					<select style="color: rgb(94, 94, 172); border-radius: 5px;" id="time[0]" id="time"> 
+					<option value="0">Select Time Slot</option> 
+					<option value="1">8:00-9:00 AM</option>
+					<option value="2">9:00-10:00 AM</option>
+					<option value="3">10:00-11:00 AM</option>
+					<option value="3">11:00-12:00 PM</option>
+					<option value="3">12:00-1:00 PM</option>
+					<option value="3">1:00-2:00 PM</option>
+					<option value="3">2:00-3:00 PM</option>
+					<option value="3">3:00-4:00 PM</option>
+					<option value="3">4:00-5:00 PM</option>
+					<option value="3">5:00-6:00 PM</option>
+					<option value="3">6:00-7:00 PM</option>
+					</select> 
+					</td> 
+					<td id="col4">
+					<select style="color: rgb(94, 94, 172); border-radius: 5px;" id="days[0]" id="days"> 
+					<option value="0">Select Days</option> 
+					<option value="1">RA</option>
+					<option value="2">ST</option>
+					<option value="3">MW</option>
+					<option value="1">R</option>
+					<option value="2">S</option>
+					<option value="3">M</option>
+					<option value="1">A</option>
+					<option value="2">T</option>
+					<option value="3">W</option>
+					</select> 
+						</td>
+					<td id="col5"><input type="text" id="faculty[0]" value="" /></td>
+					<td id="col6"><input type="text" id="room[0]" value="" /></td>
+					<td id="col7">
+						<select style="color: rgb(94, 94, 172); border-radius: 5px;" id="m[0]" id="m"> 
+					<option value="0">YES</option> 
+					<option value="1">NO</option>
+					</select> 
+						</td> 
+					<td id="col8"><input type="text" id="capacity[0]" value="" /></td>
+				</tr>  
+			</table> 
+			<table style="margin-left:auto;margin-right:auto;"> 
+				<tr> 
+					<td><input style="color: rgb(94, 94, 172); border-radius: 5px;" type="button" value="Add Row" onclick="addRows()" /></td> 
+					<td><input style="color: rgb(94, 94, 172); border-radius: 5px;" type="button" value="Delete Row" onclick="deleteRows()" /></td> 
+					<td><input style="background-color: rgb(94, 94, 172); color: white; border-radius: 5px;" id="sub" type="submit" value="Submit" /></td> 
+				</tr>  	
+	</table> 
+	
+	<script>
+
+		function addRows(){   		
+			var table = document.getElementById('Schtbl');
+			var rowCount = table.rows.length;
+			var cellCount = table.rows[0].cells.length; 
+			var row = table.insertRow(rowCount);
+			for(var i = 0; i <= cellCount; i++){			
+				var cell = 'cell'+i;
+				cell = row.insertCell(i);
+				var copycel = document.getElementById('col'+i).innerHTML;
+		
+				if(copycel.includes("course")){
+					copycel = copycel.replace("0",(rowCount-1)+"");
+				}
+				if(copycel.includes("section")){
+					copycel = copycel.replace("0",(rowCount-1)+"");
+				}
+				if(copycel.includes("time")){
+					copycel = copycel.replace("0",(rowCount-1)+"");
+				}
+				if(copycel.includes("days")){
+					copycel = copycel.replace("0",(rowCount-1)+"");
+				}
+				if(copycel.includes("faculty")){
+					copycel = copycel.replace("0",(rowCount-1)+"");
+				}
+				if(copycel.includes("room")){
+					copycel = copycel.replace("0",(rowCount-1)+"");
+				}
+				if(copycel.includes("m[0]")){
+					copycel = copycel.replace("0",(rowCount-1)+"");
+				}
+				if(copycel.includes("capacity")){
+					copycel = copycel.replace("0",(rowCount-1)+"");
+				}
+				cell.innerHTML=copycel;		
+			}
+			count++;
+		}
+		function deleteRows(){
+			var table = document.getElementById('Schtbl');
+			var rowCount = table.rows.length;
+			if(rowCount > '2'){
+				var row = table.deleteRow(rowCount-1);
+				rowCount--;
+			}
+			else{
+				alert('There should be atleast one row');
+			}
+		}
+
+</script>
+
+<script type="module">
+	
+	// Import the functions you need from the SDKs you need
+	import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
+	import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-analytics.js";
+	// TODO: Add SDKs for Firebase products that you want to use
+	// https://firebase.google.com/docs/web/setup#available-libraries
+  
+	// Your web app's Firebase configuration
+	const firebaseConfig = {
+	  apiKey: "AIzaSyCFciC_NOhz3IEdJVvSGFb2RGrkgUrNrsk",
+	  authDomain: "cse299-565aa.firebaseapp.com",
+	  projectId: "cse299-565aa",
+	  storageBucket: "cse299-565aa.appspot.com",
+	  messagingSenderId: "435830920373",
+	  appId: "1:435830920373:web:f7c8200ad4154755779afc"
+	};
+  
+	// Initialize Firebase
+	const app = initializeApp(firebaseConfig);
+	const analytics = getAnalytics(app);
+     
+
+	import{getDatabase,ref,get,set,child,update,remove}
+from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
+const db = getDatabase();
+
+
+var btn = document.getElementById("sub");
+btn.addEventListener('click',InsertData);
+
+function InsertData(){
+
+var tb = document.getElementById('Schtbl');
+var rowCount = tb.rows.length;
+for (let i = 0; i <= rowCount-2; i++) {
+				var a = document.getElementById("course["+i+"]").value;
+				var b = document.getElementById("section["+i+"]").value;
+				var c = document.getElementById("time["+i+"]").value;
+				var d = document.getElementById("days["+i+"]").value;
+				var e = document.getElementById("faculty["+i+"]").value;
+				var f = document.getElementById("room["+i+"]").value;
+				var g = document.getElementById("m["+i+"]").value;
+				var h = document.getElementById("capacity["+i+"]").value;
+				if(c=="1")c="8:00-9:00 AM";
+				else if(c=="2")c="9:00-10:00 AM";
+				else if(c=="3")c="10:00-11:00 AM";
+				else if(c=="4")c="11:00-12:00 PM";
+				else if(c=="5")c="12:00-1:00 PM";
+				else if(c=="6")c="1:00-2:00 PM";
+				else if(c=="7")c="2:00-3:00 PM";
+				else if(c=="8")c="3:00-4:00 PM";
+				else if(c=="9")c="4:00-5:00 PM";
+				else if(c=="10")c="5:00-6:00 PM";
+				else if(c=="11")c="6:00-7:00 PM";
+				if(d=="1")d="RA";
+				else if(d=="2")d="ST";
+				else if(d=="3")d="MW";
+				else if(d=="4")d="R";
+				else if(d=="5")d="S";
+				else if(d=="6")d="M";
+				else if(d=="7")d="A";
+				else if(d=="8")d="T";
+				else if(d=="9")d="W";
+				if(a=="" || b=="" || c=="0" || d=="0" || e=="" || f=="" || g=="" || h==""){
+
+                alert ("Fill All the boxes and try again");
+				window.location.href = "timeset.html";
+
+				}
+				else{
+					var x = "Course : "+a+", Section : "+b+", Time : "+c+", Day : "+d+", Faculty : "+f+", Room : "+e+", M : "+g+", Capacity : "+h;
+set(ref(db,"Faculty Timing/"+document.getElementById("room["+i+"]").value),{
+Schedule : x
+})
+.then(()=>{
+
+alert("Data Stored Successfully");
+window.location.href = "timeset.html";
+})
+.catch(()=>{
+alert("Data Stored Unsuccessful"+error);
+})
+
+				}
+}
+
+
+}
+
+
+
+  </script>
+
+
+</body> 
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body align="center" style="background-color: rgb(34, 152, 167);">
+
+<div  style="margin-top: 200px; background-color: rgb(255, 255, 255); width: 500px; height: 500px; margin-left: 35%;" align="center">
+<h1 style="padding-top: 10%;">
+Log In
+</h1>
+<h3>
+Enter your Faculty Initial
+</h3>
+<input id="uname" style="width: 200px;height: 25px;" type="text">
+<h3>
+    Enter your password
+    </h3>
+    <input id="pass" style="width: 200px;height: 25px;" type="password">
+    <br><br>
+<input onclick="chk()" style="margin-left: 150px;" type="submit">
+</div>
+<script>
+function chk(){
+
+let s = document.getElementById("uname").value;
+let s2 = document.getElementById("pass").value;
+if(s=="admin"){
+    if(s2=="admin"){
+    window.location.href = "timeset.html";
+    }
+    else{
+        alert("Enter Correct Password");
+    }
+}else{
+    let a = document.getElementById("uname").value;
+    localStorage.setItem("name",a);
+    window.location.href = "faculty.html";
+}
+
+}
+</script>
+</body>
+
+</html>
