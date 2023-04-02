@@ -75,9 +75,25 @@ th, td {
 					<td><input style="color: rgb(94, 94, 172); border-radius: 5px;" type="button" value="Add Row" onclick="addRows()" /></td> 
 					<td><input style="color: rgb(94, 94, 172); border-radius: 5px;" type="button" value="Delete Row" onclick="deleteRows()" /></td> 
 					<td><input style="background-color: rgb(94, 94, 172); color: white; border-radius: 5px;" id="sub" type="submit" value="Submit" /></td> 
+					<td><input style="background-color: rgb(94, 94, 172); color: white; border-radius: 5px;" id="chk" type="submit" value="Auto" /></td> 
 				</tr>  	
 	</table> 
-	
+	<div align="center">
+
+<form id="form">
+
+
+	<h1>Priority Set</h1>
+	<input type="file" id="docpicker" accept=".txy" required>
+     <input type="submit">
+
+
+</form>
+	</div>
+<div id="output"></div>
+
+
+
 	<script>
 
 		function addRows(){   		
@@ -149,7 +165,6 @@ th, td {
 	  messagingSenderId: "435830920373",
 	  appId: "1:435830920373:web:f7c8200ad4154755779afc"
 	};
-  
 	// Initialize Firebase
 	const app = initializeApp(firebaseConfig);
 	const analytics = getAnalytics(app);
@@ -159,12 +174,13 @@ th, td {
 from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
 const db = getDatabase();
 
-
 var btn = document.getElementById("sub");
 btn.addEventListener('click',InsertData);
 
-function InsertData(){
+var btn2 = document.getElementById("chk");
+btn2.addEventListener('click',chk);
 
+function InsertData(){
 var tb = document.getElementById('Schtbl');
 var rowCount = tb.rows.length;
 for (let i = 0; i <= rowCount-2; i++) {
@@ -218,13 +234,36 @@ alert("Data Stored Unsuccessful"+error);
 
 				}
 }
+}
+ document.getElementById("docpicker").addEventListener('change', function(event){
+event.preventDefault();
+var fr = new FileReader();
+fr.onload = function(){
+	const arr = (fr.result+"").split(/\r?\n/);
 
+for(let i = 0 ; i < arr.length ; i++){
+
+	set(ref(db,"Faculty Priority/"+(i+1)),{
+Name : arr[i]
+})
 
 }
 
+	
+}
+fr.readAsText(this.files[0]);
+ });
 
+function chk(){
+
+	
+
+}
 
   </script>
+
+
+
 
 
 </body> 
