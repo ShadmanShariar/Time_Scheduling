@@ -177,8 +177,7 @@ const db = getDatabase();
 var btn = document.getElementById("sub");
 btn.addEventListener('click',InsertData);
 
-var btn2 = document.getElementById("chk");
-btn2.addEventListener('click',chk);
+
 
 function InsertData(){
 var tb = document.getElementById('Schtbl');
@@ -242,7 +241,7 @@ fr.onload = function(){
 	const arr = (fr.result+"").split(/\r?\n/);
 
 for(let i = 0 ; i < arr.length ; i++){
-
+	localStorage.setItem(arr[i],(i+1));
 	set(ref(db,"Faculty Priority/"+(i+1)),{
 Name : arr[i]
 })
@@ -254,17 +253,57 @@ Name : arr[i]
 fr.readAsText(this.files[0]);
  });
 
-function chk(){
 
-	
-
-}
 
   </script>
+ <!-- The core Firebase JS SDK is always required and must be listed first -->
+ <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-app.js"></script>
+ <!-- include firebase database -->
+ <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-database.js"></script>
+<script>
+    
+	const firebaseConfig2 = {
+	  apiKey: "AIzaSyCFciC_NOhz3IEdJVvSGFb2RGrkgUrNrsk",
+	  authDomain: "cse299-565aa.firebaseapp.com",
+	  databaseURL: "https://cse299-565aa-default-rtdb.firebaseio.com",
+	  projectId: "cse299-565aa",
+	  storageBucket: "cse299-565aa.appspot.com",
+	  messagingSenderId: "435830920373",
+	  appId: "1:435830920373:web:f7c8200ad4154755779afc"
+	};
+  
+	firebase.initializeApp(firebaseConfig2);
+  </script>
+<script>
+var btn2 = document.getElementById("chk");
+btn2.addEventListener('click',chk);
+// listen for incoming messages
+function chk(){
+	var a = document.getElementById("time[0]").value;
+	var b = document.getElementById("days[0]").value;
+	var c = document.getElementById("course[0]").value;
+	c= c+"";
+	var ll = [];
 
+firebase.database().ref("Faculty Timing").on("child_added", function (snapshot) {
+	
+	var z = snapshot.val().Schedule;
+	var aa = z.split(",");
+    var x =aa[0].split(":")[1]+"";
+	if(x.includes(c))ll.push( snapshot.key);
+  
+});
+var min = "";
+var mm = 100000000000;
+for (let index = 0; index < ll.length; index++) {
+	const element = ll[index];
+	if(localStorage.getItem(element)<mm){
+mm= localStorage.getItem(element);
+min = element;
 
-
-
+	}
+} document.getElementById("room[0]").value=min;}
+</script>
 
 </body> 
 </html>
