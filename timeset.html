@@ -89,6 +89,7 @@ th, td {
 
 
 </form>
+<button id="clear"> Clear</button>
 	</div>
 <div id="output"></div>
 
@@ -176,7 +177,8 @@ const db = getDatabase();
 
 var btn = document.getElementById("sub");
 btn.addEventListener('click',InsertData);
-
+var btn2 = document.getElementById("clear");
+btn2.addEventListener('click',clear);
 
 
 function InsertData(){
@@ -303,6 +305,28 @@ min = element;
 
 	}
 } document.getElementById("room[0]").value=min;}
+
+
+
+function clear (){
+
+
+	localStorage.clear();
+alert("clear !");
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
 </script>
 
 </body> 
