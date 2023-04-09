@@ -4,50 +4,51 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="login.css">
     <title>Login</title>
 </head>
-<body align="center" style="background-color: rgb(145, 56, 228);">
-<div  style="margin-top: 200px; background-color: rgb(255, 255, 255); width: 500px; height: 500px; margin-left: 35%; border-radius: 10%;" align="center">
-<h1 style="padding-top: 10%;">
-Log In
-<br>
-<hr>
-</h1>
-<h3>
-    <br>
-Enter your Faculty Initial
-</h3>
-<input id="uname" style="width: 200px;height: 25px;border-radius: 5%;" type="text">
-<h3>
-    Enter your password
-    </h3>
-    <input id="pass" style="width: 200px;height: 25px; border-radius: 5%;" type="password">
-    <br><br><br>
-<input onclick="chk()" style="margin-left: 140px; background-color: deepskyblue; height: 30px;width: 70px;" type="submit">
-</div>
-<script>
-function chk(){
+<body align="center">
 
-let s = document.getElementById("uname").value;
-let s2 = document.getElementById("pass").value;
-if(s=="admin"){
-    if(s2=="admin"){
-    window.location.href = "timeset.html";
-    }
-    else{
-        alert("Enter Correct Password");
-    }
-}else{
-    if(s=="" && s2==""){
+    <div align="center">
+        <h1 style="">
+            Log In
+        </h1>
+        <h3>
+            Faculty Initial
+        </h3>
+        <input id="uname" type="text" placeholder="Enter your Faculty Initial here" required="required">
+        <h3>
+            Password
+        </h3>
+        <input id="pass" type="password" minlength="8" placeholder="Enter your RDS password here" required="required">
+        <br><br>
+        <h4>
+        <input onclick="chk()" type="submit" value="Login">
+        </h4>
+    </div>
+    <script>
+        function chk() {
+
+            let s = document.getElementById("uname").value;
+            let s2 = document.getElementById("pass").value;
+            if (s == "admin") {
+                if (s2 == "admin") {
+                    window.location.href = "timeset.html";
+                }
+                else {
+                    alert("Enter Correct Password");
+                }
+            } else {
+                if(s=="" && s2==""){
         alert("Enter initial and paddword correctly");
     }else{
     let a = document.getElementById("uname").value;
     localStorage.setItem("name",a);
     window.location.href = "faculty.html";}
-}
+            }
 
-}
-</script>
+        }
+    </script>
 </body>
 
 </html>
