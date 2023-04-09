@@ -4,71 +4,73 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="faculty.css">
     <title>Faculty</title>
 </head>
 <body align="center">
-
 <h1>
     Welcome Faculty This is your Schedule
 </h1>
-
- 
- <!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-app.js"></script>
-<!-- include firebase database -->
-<script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-database.js"></script>
- 
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-app.js"></script>
+    <!-- include firebase database -->
+    <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-database.js"></script>
 
 
-<script>
-    
-  const firebaseConfig = {
-    apiKey: "AIzaSyCFciC_NOhz3IEdJVvSGFb2RGrkgUrNrsk",
-    authDomain: "cse299-565aa.firebaseapp.com",
-    databaseURL: "https://cse299-565aa-default-rtdb.firebaseio.com",
-    projectId: "cse299-565aa",
-    storageBucket: "cse299-565aa.appspot.com",
-    messagingSenderId: "435830920373",
-    appId: "1:435830920373:web:f7c8200ad4154755779afc"
-  };
 
-  firebase.initializeApp(firebaseConfig);
-</script>
-<ul style="list-style-type: none; font-size: larger; color: black" id="messages"></ul>
-<script>
-    // listen for incoming messages
-    let y = localStorage.getItem("name");
-var x = y+"";
-    firebase.database().ref("Faculty Timing").on("child_added", function (snapshot) {
-       if(snapshot.key==x){
-        var html = "";
-        var ss = 'style="margin-bottom:1%;"';
-        // give each message a unique ID
-        html += "<li ";
-        html += ss;
-        html += "id='message-" + snapshot.key + "'>";
-        html += snapshot.val().Schedule;
-        html += "</li>";
-        document.getElementById("messages").innerHTML += html;
-       }
-    });
-</script>
+    <script>
 
-<div>
-    <h1>Request Here For Schedule</h1>
-    <form
-    action="https://formspree.io/f/xnqwjoel"
-    method="POST"
-  >
-  <h3 style="color: darkblue;" >Enter Your Faculty Initial</h3><input type="text" style="height: 20px;" name="Name" required> <br>  
-<h3 style="color: darkblue;" >Enter Your Course Name </h3><input type="text" style="height: 20px;" name="Course Name" required> <br>
-<h3 style="color: darkblue;">Enter Your Previous Schedule Day</h3><input type="text" style="height: 20px;" name="Previous Schedule Day" required> <br>
-<h3 style="color: darkblue;">Enter Your Desire Day</h3><input type="text" style="height: 20px;" name="Desire Day" required> <br>
-<h3 style="color: darkblue;">Enter Your Previous Schedule Time</h3><input type="text" style="height: 20px;" name="Previous Schedule Time" required><br>
-<h3 style="color: darkblue;">Enter Your Desire Time</h3><input type="text" style="height: 20px;" name="Desire Time" required> <br><br>
-<button style="margin-left: 9%; color: darkblue; ">Submit</button>
-</form>
-</div>
+        const firebaseConfig = {
+            apiKey: "AIzaSyCFciC_NOhz3IEdJVvSGFb2RGrkgUrNrsk",
+            authDomain: "cse299-565aa.firebaseapp.com",
+            databaseURL: "https://cse299-565aa-default-rtdb.firebaseio.com",
+            projectId: "cse299-565aa",
+            storageBucket: "cse299-565aa.appspot.com",
+            messagingSenderId: "435830920373",
+            appId: "1:435830920373:web:f7c8200ad4154755779afc"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+    </script>
+    <ul id="messages"></ul>
+    <script>
+        // listen for incoming messages
+        let y = localStorage.getItem("name");
+        var x = y + "";
+        firebase.database().ref("Faculty Timing").on("child_added", function (snapshot) {
+            if (snapshot.key == x) {
+                var html = "";
+                var ss = 'style="margin-bottom:1%;"';
+                // give each message a unique ID
+                html += "<li ";
+                html += ss;
+                html += "id='message-" + snapshot.key + "'>";
+                html += snapshot.val().Schedule;
+                html += "</li>";
+                document.getElementById("messages").innerHTML += html;
+            }
+        });
+    </script>
+
+    <div>
+        <h1>Request Here For Scheduling</h1>
+        <form action="https://formspree.io/f/xnqwjoel"
+              method="POST">
+            <h3 style="color: darkblue;">Enter Your Faculty Initial</h3>
+            <input type="text" name="Name" required> <br>
+            <h3 style="color: darkblue;">Enter Your Course Name </h3>
+            <input type="text" name="Course Name" required> <br>
+            <h3 style="color: darkblue;">Enter Your Previous Schedule Day</h3>
+            <input type="text" name="Previous Schedule Day" required> <br>
+            <h3 style="color: darkblue;">Enter Your Desire Day</h3>
+            <input type="text" name="Desire Day" required> <br>
+            <h3 style="color: darkblue;">Enter Your Previous Schedule Time</h3>
+            <input type="text" name="Previous Schedule Time" required><br>
+            <h3 style="color: darkblue;">Enter Your Desire Time</h3>
+            <input type="text" name="Desire Time" required> <br><br>
+            <button style="display: block; margin: 0 auto; color: darkblue;">Submit</button>
+        </form>
+    </div>
 
 
 </body>
